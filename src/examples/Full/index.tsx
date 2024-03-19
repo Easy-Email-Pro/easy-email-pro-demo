@@ -83,6 +83,22 @@ const mergetags = [
     ],
   },
   {
+    label: "Social",
+    value: "",
+    children: [
+      {
+        label: "Facebook",
+        value: "social.facebook",
+        type: "image",
+      },
+      {
+        label: "Twitter",
+        value: "social.twitter",
+        type: "image",
+      },
+    ],
+  },
+  {
     label: "Customer",
     value: "",
     children: [
@@ -113,7 +129,7 @@ const mergetags = [
       {
         label: "Website",
         value: "common.website",
-        type: "image",
+        type: "link",
       },
     ],
   },
@@ -127,6 +143,12 @@ const mergetagsData = {
   customer: {
     name: "Ryan",
     email: "easy-email-pro@example.com",
+  },
+  social: {
+    facebook:
+      "https://res.cloudinary.com/dfite2e16/image/upload/v1681908521/clgnivsuj0018z9ltiixmxf6k/ulyduaza1votoacctoi3.png",
+    twitter:
+      "https://res.cloudinary.com/dfite2e16/image/upload/v1681908489/clgnivsuj0018z9ltiixmxf6k/xkd0kfnytbfywsofk8t6.png",
   },
   products: [
     {
