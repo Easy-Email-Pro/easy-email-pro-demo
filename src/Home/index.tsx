@@ -25,6 +25,7 @@ import { useEffect } from "react";
 import axios from "axios";
 import { PageElement } from "easy-email-pro-core";
 import FullScreenLoading from "@/components/FullScreenLoading";
+import { SharedComponents } from "easy-email-pro-theme";
 
 const features = [
   {
@@ -167,26 +168,51 @@ export const Home = () => {
             >
               <strong>Write Email</strong>
             </Button>
+            <Button
+              type="primary"
+              target="_blank"
+              href="https://docs.easyemail.pro/docs/intro/?utm_souce=demo"
+            >
+              <strong>Docs</strong>
+            </Button>
           </Space>
         </div>
       </div>
       <Layout.Content style={{ padding: 20 }}>
         <Space direction="vertical" size="large" style={{ width: "100%" }}>
           <Tabs defaultActiveTab="Feature">
-            <Tabs.TabPane key={"Feature"} title={"Feature"}>
-              <Card style={{ backgroundColor: "#fff" }} title="Features">
-                <Grid.Row>
-                  {features.map((item, index) => {
-                    return (
-                      <Grid.Col xs={1} sm={1} md={4} lg={6}>
-                        <EmailItem item={item} />
-                      </Grid.Col>
-                    );
-                  })}
-                </Grid.Row>
-              </Card>
+            <Tabs.TabPane
+              key={"Feature"}
+              title={
+                <span style={{ fontSize: 20, fontWeight: "bold" }}>
+                  Feature
+                </span>
+              }
+            >
+              <SharedComponents.FullHeightOverlayScrollbars
+                height={`calc(100vh - 180px)`}
+              >
+                <Card style={{ backgroundColor: "#fff" }}>
+                  <Grid.Row>
+                    {features.map((item, index) => {
+                      return (
+                        <Grid.Col xs={1} sm={1} md={4} lg={6}>
+                          <EmailItem item={item} />
+                        </Grid.Col>
+                      );
+                    })}
+                  </Grid.Row>
+                </Card>
+              </SharedComponents.FullHeightOverlayScrollbars>
             </Tabs.TabPane>
-            <Tabs.TabPane key={"Templates"} title={"Template"}>
+            <Tabs.TabPane
+              key={"Templates"}
+              title={
+                <span style={{ fontSize: 20, fontWeight: "bold" }}>
+                  Template
+                </span>
+              }
+            >
               <Card
                 style={{ backgroundColor: "#fff" }}
                 title={

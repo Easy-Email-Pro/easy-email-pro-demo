@@ -14,7 +14,6 @@ import { IconLeft, IconMenu } from "@arco-design/web-react/icon";
 import React from "react";
 import { EmailTemplate, useEditorProps } from "easy-email-pro-editor";
 import { mjmlToJson, useEditorContext } from "easy-email-pro-theme";
-import Logo from "../Home/easy-email-pro.svg";
 import {
   EditorCore,
   PluginManager,
@@ -25,13 +24,15 @@ import mjml from "mjml-browser";
 import { saveAs } from "file-saver";
 import { Uploader } from "@/utils/Uploader";
 import { pick } from "lodash";
-import { SendEmailModal } from "./SendEmailModal";
+import { ReactEditor, useSlate } from "slate-react";
+import { useSearchParams } from "react-router-dom";
 
 export const EditorHeader = (props: {
   extra?: React.ReactNode;
   hideImport?: boolean;
   hideExport?: boolean;
 }) => {
+  const editor = useSlate();
   const [collapsed, setCollapsed] = React.useState(true);
   const [text, setText] = React.useState("");
   const [visible, setVisible] = React.useState(false);
@@ -43,6 +44,9 @@ export const EditorHeader = (props: {
   };
 
   const { universalElementSetting } = useEditorProps();
+  const [params] = useSearchParams();
+
+  const isDev = params.get("dev") === "true";
 
   const onExportImage = async () => {
     Message.loading("Loading...");
@@ -71,6 +75,24 @@ export const EditorHeader = (props: {
     });
     saveAs(blob, "demo.png");
     Message.clear();
+  };
+  const onExportPDF = async () => {
+    const printCSS = document.createElement("style");
+    printCSS.innerHTML = `
+    @media print {
+      body {
+          -webkit-print-color-adjust: exact;
+          color-adjust: exact;
+      }
+    }
+  `;
+
+    const contentWindow = ReactEditor.getWindow(editor);
+    if (contentWindow) {
+      contentWindow.document.body.appendChild(printCSS);
+      contentWindow.print();
+      printCSS.parentElement?.removeChild(printCSS);
+    }
   };
 
   const onExportJSON = () => {
@@ -227,13 +249,6 @@ export const EditorHeader = (props: {
           backIcon={<IconMenu />}
           onBack={() => setCollapsed(!collapsed)}
           className="editor-header"
-          title={
-            <div style={{ cursor: "pointer" }}>
-              <a href="https://www.easyemail.pro/">
-                <Logo className="logo" height={36} width={175} />
-              </a>
-            </div>
-          }
           style={{
             backgroundColor: "rgb(var(--primary-6))",
             color: "#fff !important",
@@ -267,7 +282,7 @@ export const EditorHeader = (props: {
               <Space>
                 {props?.extra}
 
-                {!props.hideImport && (
+                {!props.hideImport && isDev && (
                   <Dropdown
                     droplist={
                       <Menu>
@@ -309,6 +324,9 @@ export const EditorHeader = (props: {
                         <Menu.Item key="Export Image" onClick={onExportImage}>
                           Export Image
                         </Menu.Item>
+                        <Menu.Item key="Export PDF" onClick={onExportPDF}>
+                          Export PDF
+                        </Menu.Item>
                       </Menu>
                     }
                   >
@@ -321,7 +339,13 @@ export const EditorHeader = (props: {
                 {/* <Button disabled={!dirty} onClick={() => submit()}>
                   <strong>Submit</strong>
                 </Button> */}
-                <SendEmailModal />
+                {/* <SendEmailModal /> */}
+                <Button
+                  target="_blank"
+                  href="https://docs.easyemail.pro/docs/intro?utm_source=demo"
+                >
+                  <strong>Docs</strong>
+                </Button>
                 <Button
                   target="_blank"
                   href="https://www.easyemail.pro/?#trial?utm_source=demo"

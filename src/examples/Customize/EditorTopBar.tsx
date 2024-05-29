@@ -10,7 +10,6 @@ import { EmojiPlugin } from "easy-email-pro-plugins";
 import customizeTopBarCss from "./customize-top-bar.scss?inline";
 import { useSlate } from "slate-react";
 import { IconRedo, IconUndo } from "@arco-design/web-react/icon";
-import { AIAssistantPlugin } from "./AIAssistant";
 import { Editor, Range } from "slate";
 
 export const EditorTopBar: React.FC = () => {
@@ -40,11 +39,10 @@ export const EditorTopBar: React.FC = () => {
       () => (
         <span className="controller-item" data-enable={redoable}>
           <Tooltip position="top" content={t("Redo")}>
-            <IconRedo onClick={editor.redo} />
+            <IconRedo width={40} onClick={editor.redo} />
           </Tooltip>
         </span>
       ),
-      () => <AIAssistantPlugin isCollapsed={isCollapsed} />,
       TextFormat.FONT_FAMILY,
       TextFormat.FONT_SIZE,
       TextFormat.BOLD,
@@ -83,6 +81,12 @@ export const EditorTopBar: React.FC = () => {
       >
         <SharedComponents.RichTextBar list={list} />
         <style id="customize-editor-css">{customizeTopBarCss}</style>
+        <style>
+          {`.EditorTopBar {
+          --hovering-bar-icon-size: 16px;
+
+        }`}
+        </style>
       </div>
     );
   }

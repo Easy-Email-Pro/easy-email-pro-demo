@@ -20,17 +20,14 @@
         "font-family": "Arial, sans-serif"
       },
       "categoryAttributes": {
-        "BUTTON": { "padding-right": "25px", "padding-bottom": "10px" }
+        "BUTTON": {
+          "padding-right": "25px",
+          "padding-bottom": "10px"
+        }
       }
     },
     "type": "page",
     "children": [
-      {
-        "type": "frozen_header",
-        "data": {},
-        "attributes": {},
-        "children": [{ "text": "" }]
-      },
       {
         "type": "standard-section",
         "data": {},
@@ -43,7 +40,9 @@
         "children": [
           {
             "type": "standard-column",
-            "attributes": { "width": "100%" },
+            "attributes": {
+              "width": "100%"
+            },
             "data": {},
             "children": [
               {
@@ -56,7 +55,11 @@
                   "align": "left",
                   "color": "#FFFFFF"
                 },
-                "children": [{ "text": "Terms and Condition" }]
+                "children": [
+                  {
+                    "text": "Terms and Condition"
+                  }
+                ]
               },
               {
                 "name": "Text",
@@ -102,7 +105,11 @@
                   "src": "https://res.cloudinary.com/dfite2e16/image/upload/v1682341762/beacas/ftwn32fhyholn4c9jpxs.png",
                   "width": "150px"
                 },
-                "children": [{ "text": "" }],
+                "children": [
+                  {
+                    "text": ""
+                  }
+                ],
                 "mobileAttributes": {}
               },
               {
@@ -113,40 +120,60 @@
                   {
                     "data": {},
                     "type": "standard-navbar-link",
-                    "children": [{ "text": "Shop" }],
-                    "attributes": { "href": "" }
+                    "children": [
+                      {
+                        "text": "Shop"
+                      }
+                    ],
+                    "attributes": {
+                      "href": ""
+                    }
                   },
                   {
                     "data": {},
                     "type": "standard-navbar-link",
-                    "children": [{ "text": "About" }],
-                    "attributes": { "href": "" }
+                    "children": [
+                      {
+                        "text": "About"
+                      }
+                    ],
+                    "attributes": {
+                      "href": ""
+                    }
                   },
                   {
                     "data": {},
                     "type": "standard-navbar-link",
-                    "children": [{ "text": "Contact" }],
-                    "attributes": { "href": "" }
+                    "children": [
+                      {
+                        "text": "Contact"
+                      }
+                    ],
+                    "attributes": {
+                      "href": ""
+                    }
                   },
                   {
                     "data": {},
                     "type": "standard-navbar-link",
-                    "children": [{ "text": "Blog" }],
-                    "attributes": { "href": "" }
+                    "children": [
+                      {
+                        "text": "Blog"
+                      }
+                    ],
+                    "attributes": {
+                      "href": ""
+                    }
                   }
                 ]
               }
             ]
           }
         ],
-        "mobileAttributes": { "padding-bottom": "10px", "padding-right": "0px" }
-      },
-
-      {
-        "type": "frozen_footer",
-        "data": {},
-        "attributes": {},
-        "children": [{ "text": "" }]
+        "mobileAttributes": {
+          "padding-bottom": "10px",
+          "padding-right": "0px"
+        }
       }
     ],
     "attributes": {

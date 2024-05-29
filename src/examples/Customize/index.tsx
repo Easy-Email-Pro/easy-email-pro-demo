@@ -65,6 +65,8 @@ export default function MyEditor() {
     ElementToolsInner: ElementToolsInner,
     showDragMoveIcon: true,
     showInsertTips: true,
+    showSourceCode: true,
+    showLayer: true,
     hoveringToolbar,
   });
 

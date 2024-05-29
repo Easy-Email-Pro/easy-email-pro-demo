@@ -630,7 +630,7 @@ const fonts = [
 ];
 
 export default function MyEditor() {
-  const [theme, setTheme] = React.useState<string>("retro");
+  const [theme, setTheme] = React.useState<string>("green");
   const [compact, setCompact] = useState(false);
   const { upload } = useUpload();
   const [lang, setLang] = useState<string>("en");
@@ -647,6 +647,7 @@ export default function MyEditor() {
       list({ isCollapsed, selection, isFocus }) {
         // if (!isFocus) return [];
         return [
+          TextFormat.AI_ASSISTANT,
           TextFormat.FONT_FAMILY,
           TextFormat.FONT_SIZE,
           TextFormat.BOLD,
@@ -722,6 +723,23 @@ export default function MyEditor() {
     console.log("onChange", values);
   };
 
+  const AIAssistant: ThemeConfigProps["AIAssistant"] = useMemo(() => {
+    return {
+      async onGenerate(messages) {
+        const { data } = await axios.post<{ content: string; role: string }>(
+          `https://admin.easyemail.pro/api/ai`,
+          {
+            data: {
+              messages: messages,
+              model: "gpt-3.5-turbo",
+            },
+          }
+        );
+        return { content: data.content, role: data.role };
+      },
+    };
+  }, []);
+
   useEffect(() => {
     EditorCore.auth(process.env.CLIENT_ID!)
       .then(() => {
@@ -746,6 +764,7 @@ export default function MyEditor() {
       clientId: process.env.UNSPLASH_CLIENT_ID!,
     },
     hoveringToolbar: hoveringToolbar,
+    AIAssistant,
     showSourceCode: true,
     showLayer: true,
     showPreview: true,
@@ -792,7 +811,7 @@ export default function MyEditor() {
                 </Space>
               </div>
             </Button> */}
-            <Select
+            {/* <Select
               style={{ width: 120 }}
               value={hoveringToolbarPosition}
               onChange={setHoveringToolbarPosition}
@@ -802,7 +821,7 @@ export default function MyEditor() {
                 { label: "Container", value: "container" },
                 { label: "Page", value: "page" },
               ]}
-            ></Select>
+            ></Select> */}
             <Select
               style={{ width: 120 }}
               value={theme}
@@ -814,6 +833,11 @@ export default function MyEditor() {
                 { label: "Green", value: "green" },
                 { label: "Red", value: "red" },
               ]}
+              triggerElement={
+                <Button>
+                  <strong>Theme Color</strong>
+                </Button>
+              }
             ></Select>
             <TranslationSelect lang={lang} />
             <Select

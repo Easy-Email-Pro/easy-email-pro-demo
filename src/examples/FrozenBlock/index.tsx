@@ -5,17 +5,74 @@ import "easy-email-pro-theme/lib/style.css";
 import "@arco-themes/react-easy-email-pro/css/arco.css";
 
 import data from "./template.json";
-import emptyData from "./empty.json";
 import { EditorHeader } from "../../components/EditorHeader";
 import { useUpload } from "../../hooks/useUpload";
 import { Layout } from "@arco-design/web-react";
 import React from "react";
-import { BlockManager, PageElement } from "easy-email-pro-core";
-import { FrozenHeader } from "./FrozenHeader";
-import { FrozenFooter } from "./FrozenFooter";
+import { Element } from "easy-email-pro-core";
 import { useCompactMode } from "@/hooks/useCompactMode";
 
-BlockManager.registerBlocks([FrozenHeader, FrozenFooter]);
+const headerElement: Element = {
+  type: "standard-section",
+  data: {},
+  attributes: {
+    "background-repeat": "no-repeat",
+    "background-color": "#4a90e2",
+  },
+  children: [
+    {
+      type: "standard-column",
+      attributes: {
+        width: "100%",
+      },
+      data: {},
+      children: [
+        {
+          name: "Text",
+          type: "standard-paragraph",
+          data: {},
+          attributes: {},
+          children: [
+            {
+              text: "FROZEN HEADER",
+            },
+          ],
+        },
+      ],
+    },
+  ],
+};
+
+const footerElement: Element = {
+  type: "standard-section",
+  data: {},
+  attributes: {
+    "background-repeat": "no-repeat",
+    "background-color": "#4a90e2",
+  },
+  children: [
+    {
+      type: "standard-column",
+      attributes: {
+        width: "100%",
+      },
+      data: {},
+      children: [
+        {
+          name: "Text",
+          type: "standard-paragraph",
+          data: {},
+          attributes: {},
+          children: [
+            {
+              text: "FROZEN FOOTER",
+            },
+          ],
+        },
+      ],
+    },
+  ],
+};
 
 export default function MyEditor() {
   const { upload } = useUpload();
@@ -50,7 +107,8 @@ export default function MyEditor() {
     compact: false,
     showDragMoveIcon: true,
     showInsertTips: true,
-    emptyPageElement: emptyData as PageElement,
+    headerElement: headerElement,
+    footerElement: footerElement,
   });
 
   return (
